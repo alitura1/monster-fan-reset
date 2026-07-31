@@ -51,6 +51,20 @@ Edit `src/FanReset.ini` after copying the example:
 
 The public version deliberately has no indefinite “fan off” mode and no setting above the fixed 10-second maximum.
 
+## Exclusive manual-off mode
+
+`FanManual.ps1` provides a separate, guarded manual mode for troubleshooting a single fan. It deliberately allows **only one primary fan** to be off at a time:
+
+```powershell
+.\FanManual.ps1 -Action CPUOff  # CPU off; GPU held at 100%
+.\FanManual.ps1 -Action GPUOff  # switches CPU back on, then turns GPU off
+.\FanManual.ps1 -Action Auto    # immediately returns all fans to firmware auto
+```
+
+The background monitor checks EC temperature twice per second. It returns all fans to automatic control if temperature cannot be read or reaches `TempAbort`. Switching from `CPUOff` to `GPUOff` first restores all fans to automatic control and only then applies the new state, so it will never intentionally keep both primary fans off.
+
+The monitor is a safety component, not a replacement for normal cooling. Do not use manual-off mode while the laptop is under load.
+
 ## Fan mapping
 
 On the validated device, the firmware maps duty byte 0 to the CPU fan and byte 1 to the GPU fan. The exact mapping may differ on other Tongfang models. If a target controls the wrong fan, stop testing and open an issue.
