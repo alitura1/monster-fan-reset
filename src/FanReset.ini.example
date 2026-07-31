@@ -1,0 +1,11 @@
+# Copy this file to FanReset.ini and adjust values if needed.
+# Public defaults are deliberately conservative.
+
+# Requested stop duration in seconds. Allowed range: 1-10.
+HoldSeconds=4
+
+# The tool refuses to stop a fan at or above this EC temperature. Allowed: 60-95.
+TempAbort=85
+
+# CPU, GPU, or Both. Desktop shortcuts can override this value.
+TargetFan=Both

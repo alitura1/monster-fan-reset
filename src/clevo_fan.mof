@@ -1,0 +1,24 @@
+// Minimal projection of the Tongfang/Clevo ACPI WMI fan methods.
+// The firmware exposes GUID ABBC0F6D and method object WMBB.
+// Validated on Monster Abra A5 V21.1 / Tongfang GM5MU only.
+
+#pragma autorecover
+#pragma namespace("\\\\.\\root\\WMI")
+
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"),
+ Description("Tongfang/Clevo ACPI WMI fan methods"),
+ guid("{ABBC0F6D-8EA1-11D1-00A0-C90629100000}")]
+class CLEVO_GET
+{
+    [key, read] string InstanceName;
+    [read] boolean Active;
+
+    [WmiMethodId(112), Implemented, read, write]
+    void GetFan12RPM([out, id(0)] uint32 Data);
+
+    [WmiMethodId(104), Implemented, read, write]
+    void SetFanDuty([in, id(0)] uint32 Data);
+
+    [WmiMethodId(105), Implemented, read, write]
+    void SetFanAutoDuty([in, id(0)] uint32 Data);
+};

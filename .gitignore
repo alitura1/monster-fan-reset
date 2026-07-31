@@ -1,0 +1,19 @@
+# Local configuration and runtime output
+src/FanReset.ini
+*.log
+
+# Generated or downloaded binaries
+*.exe
+*.dll
+*.sys
+*.bin
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Windows and editor artifacts
+Thumbs.db
+Desktop.ini
+.vs/
+.vscode/
